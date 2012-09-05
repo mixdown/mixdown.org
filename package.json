@@ -34,8 +34,8 @@
         "winston" : "*",
         "winston-syslog": "*",
         "optimist": "*",
-        "mixdown-server": "git@github.com:mixdown/server",
-        "mixdown-plugins": "git@github.com:mixdown/plugins",
+        "mixdown-server": "*",
+        "mixdown-plugins": "*",
         "node-pipeline": "*"
     },
         "devDependencies": {
