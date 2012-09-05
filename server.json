@@ -1,0 +1,39 @@
+{
+	"app": {
+		"plugins":{
+			"router": {
+				"module": "/plugins/router.js"
+			},
+			"view": {
+				"module": "broadway-handlebars",
+				"options": {
+					"optimize": false,
+					"development": true
+				}
+			},
+			"twitter": {
+				"module": "/plugins/twitter.js"
+			},
+			"json": {
+				"module": "mixdown-plugins#Json"
+			},
+			"error": {
+				"module": "mixdown-plugins#Error"
+			}
+		}
+	},
+	"sites": [
+		{
+			"id": "boilerplate",
+			"hostmap": [
+				"localhost",
+				"boilerplate.local",
+				"127.0.0.1"
+			],
+			"plugins": {}
+		}
+	],
+	"server": {
+	    "port": 8080
+	}
+}

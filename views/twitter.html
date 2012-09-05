@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <title>Twitter Test</title>
+    </head>
+    <body>
+        <h1>Here are those twitters you wanted for "{{query}}"</h1>
+        <ul>
+            {{#each results}}
+                <li>
+                    <img src="{{value.profile_image_url}}">
+                    <strong>{{value.from_user}}</strong>:
+                    {{value.text}}
+                </li>
+            {{/each}}
+    </body>
+</html>

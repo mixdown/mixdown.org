@@ -1,0 +1,46 @@
+{
+    "name": "mixdown-boilerplate",
+    "version": "0.1.0",
+    "main": "index",
+    "description": "Base site implementation for a mixdown powered site.",
+    "keywords": [
+        "node"
+    ],
+    "author": {
+        "name": "Vast",
+        "email": "vastjs-dev@vast.com",
+        "web": "http://vastdevblog.vast.com/"
+    }, 
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git@git.vast.com:mixdown/autos/pipelines"
+    },
+    "directories": {
+        "tests": "tests"
+    },
+    "engines": {
+        "node": ">=0.8.0"
+    },
+    "scripts": {
+        "start": "node server"
+    },
+    "dependencies": {
+        "request": "*",
+        "lodash": "*",
+        "broadway-handlebars": "*",
+        "async": "*",
+        "pipeline-router": "*",
+        "winston" : "*",
+        "winston-syslog": "*",
+        "optimist": "*",
+        "mixdown-server": "git+http://buildagent:v4std3v@git.vast.com/git/mixdown/server",
+        "mixdown-plugins": "git+http://buildagent:v4std3v@git.vast.com/git/mixdown/plugins",
+        "node-pipeline": "*"
+    },
+        "devDependencies": {
+    },
+    "optionalDependencies": {},
+    "homepage": "http://vastdevblog.vast.com/"
+}
+
