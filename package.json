@@ -14,7 +14,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "git@git.vast.com:mixdown/autos/pipelines"
+        "url": "git@github.com:mixdown/boilerplate"
     },
     "directories": {
         "tests": "tests"
@@ -34,8 +34,8 @@
         "winston" : "*",
         "winston-syslog": "*",
         "optimist": "*",
-        "mixdown-server": "git+http://buildagent:v4std3v@git.vast.com/git/mixdown/server",
-        "mixdown-plugins": "git+http://buildagent:v4std3v@git.vast.com/git/mixdown/plugins",
+        "mixdown-server": "git@github.com:mixdown/server",
+        "mixdown-plugins": "git@github.com:mixdown/plugins",
         "node-pipeline": "*"
     },
         "devDependencies": {
