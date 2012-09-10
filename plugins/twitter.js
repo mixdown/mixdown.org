@@ -22,6 +22,7 @@ Twitter.prototype.attach = function(options) {
             }
         )
     };
+
 };
 
 module.exports = Twitter;

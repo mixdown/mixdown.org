@@ -36,7 +36,11 @@
         "optimist": "*",
         "mixdown-server": "*",
         "mixdown-plugins": "*",
-        "node-pipeline": "*"
+        "node-pipeline": "*",
+        "browserify": "*",
+        "uglify-js": "*",
+        "backbone-browserify": "*",
+        "jquery-browserify": "*"
     },
         "devDependencies": {
     },

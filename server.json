@@ -19,6 +19,18 @@
 			},
 			"error": {
 				"module": "mixdown-plugins#Error"
+			},
+			"static": {
+				"module": "mixdown-plugins#Static",
+				"options": {
+					"path": "/static"
+				}
+			},
+			"browserify": {
+				"module": "mixdown-plugins#Browserify",
+				"options": {
+					"compress": false
+				}
 			}
 		}
 	},

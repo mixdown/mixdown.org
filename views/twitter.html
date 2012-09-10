@@ -2,15 +2,12 @@
     <head>
         <title>Twitter Test</title>
     </head>
+
     <body>
-        <h1>Here are those twitters you wanted for "{{query}}"</h1>
-        <ul>
-            {{#each results}}
-                <li>
-                    <img src="{{value.profile_image_url}}">
-                    <strong>{{value.from_user}}</strong>:
-                    {{value.text}}
-                </li>
-            {{/each}}
+        <h1>Which twitters did you want?</h1>
+        <input id="q" type="search" placeholder="these kinds">
+        <button id="getTwitters">get twitters</button>
+        <div id="tweets"></div>
+        <script type="text/javascript" src="/js/main.js"></script>
     </body>
 </html>

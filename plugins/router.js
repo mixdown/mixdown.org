@@ -1,5 +1,8 @@
 var Router = require('pipeline-router'),
-	Pipeline = require('node-pipeline');
+	Pipeline = require('node-pipeline'),
+	path = require('path'),
+	browserify = require('browserify'),
+	uglify = require('uglify-js');
 
 var BoilerplateRouter = function() {};
 
@@ -18,6 +21,25 @@ BoilerplateRouter.prototype.attach = function (options) {
 	    var router = new Router();
 
 	    router.param('query', /(.*)/);
+	    
+	    // static files
+	    router.get(/\/static\/(.*)/, function(req, res) {
+	    	
+	    	var filePath = req.url.match(/\/static(.*)/)[1];
+	    	app.plugins.static(path.normalize(__dirname + '/../static/' + filePath), res, function(error) {
+	    		app.plugins.error.notfound(error, res);
+	    	});
+	    	
+	    });
+
+	    // aggregate js
+	    router.get('/js/main.js', function(req, res) {
+	    	var fullPath = path.normalize(__dirname + '/../static/js/main.js');
+
+	    	var data = app.plugins.browserify(fullPath);
+	    	res.writeHead(200, {'Content-Type': 'text/javascript'});
+	    	res.end(data);
+	    });
 
 	    // twitter
 	    router.get('/twitter?:query', function (req, res) {
@@ -54,7 +76,7 @@ BoilerplateRouter.prototype.attach = function (options) {
 
 	    // secret twitter!
 	    router.get('/api/twitter?:query', function(req, res) {
-	    	var pl = Pipeline.create("Twitter API Pipeline: " + req.params.query || req.query.q);
+	    	var pl = Pipeline.create("Twitter API Pipeline: " + (req.params.query || req.query.q));
 
 	    	pl.use(function(results, next) {
 	    		app.plugins.twitter(results[0], next);
