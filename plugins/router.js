@@ -1,16 +1,13 @@
-var Router = require('pipeline-router'),
-	Pipeline = require('node-pipeline'),
-	path = require('path'),
-	browserify = require('browserify'),
-	uglify = require('uglify-js');
+var path = require('path'),
+	Router = require('pipeline-router');
 
-var BoilerplateRouter = function() {};
+var HelloRouter = function() {};
 
 /**
-* Attaches an autos router plugin to an application.
+* Attaches a router plugin to an application.
 *
 **/ 
-BoilerplateRouter.prototype.attach = function (options) {
+HelloRouter.prototype.attach = function (options) {
 	var app = options.app;
 
 	/**
@@ -20,85 +17,86 @@ BoilerplateRouter.prototype.attach = function (options) {
 	this.router = function() {
 	    var router = new Router();
 
-	    router.param('query', /(.*)/);
+	    router.param('css', /(.*)\.css/);
+	    router.param('image', /.*\.jpeg|jpg|gif|png|ico|icns?/);
+
+	    router.get('/', function(req, res) {
+
+	    	// put the querystring on the viewmodel
+	    	var viewmodel = { query: req.urlParsed.query };
+
+	    	// render the html
+	    	app.plugins.render('index', viewmodel, function(err, html) {
+
+	    		// send to error handler if render problem.
+	    		if (err) {
+					app.plugins.error.fail(err, res);
+					return;
+				}
+				
+				// stream the response.
+				res.writeHead(200, {'Content-Type': 'text/html'});
+				res.end(html);
+	    	});	
+	    });
 	    
-	    // static files
-	    router.get(/\/static\/(.*)/, function(req, res) {
-	    	
-	    	var filePath = req.url.match(/\/static(.*)/)[1];
-	    	app.plugins.static(path.normalize(__dirname + '/../static/' + filePath), res, function(error) {
-	    		app.plugins.error.notfound(error, res);
-	    	});
-	    	
+	     router.get('/api', function(req, res) {
+	    	// put the querystring on the viewmodel
+	    	var viewmodel = { query: req.urlParsed.query };
+
+	    	// stream object.
+	    	app.plugins.json(viewmodel, res);
 	    });
 
-	    // aggregate js
-	    router.get('/js/main.js', function(req, res) {
-	    	var fullPath = path.normalize(__dirname + '/../static/js/main.js');
+	    // style sheets files
+	    router.get('/css/:css', function(req, res) {
 
-	    	var data = app.plugins.browserify(fullPath);
-	    	res.writeHead(200, {'Content-Type': 'text/javascript'});
-	    	res.end(data);
-	    });
+	    	var pl = app.plugins.less.pipeline(),
+				file = path.normalize(__dirname + '/../css/' + req.params.css + '.less');
 
-	    // twitter
-	    router.get('/twitter?:query', function (req, res) {
-	    	var pl = Pipeline.create("Twitter Pipeline: " + req.params.query || req.query.q);
-
-	    	pl.use(function(results, next) {
-	    		app.plugins.twitter(results[0], next);
-	    	}, "Executing Search")
-
-	    	.on('step', function(name, action){
-	    		console.log(pl.name + ':' + name);
-	    	})
-
-	    	.on('error', function(err) {
-	    		app.plugins.error.fail(err, res);
-	    	})
-
-	    	.on('end', function(err, results) {
-	    		if (!err) {
-		    		var data = results[results.length - 1];
-		    		app.plugins.render('views/twitter', data, function(err, html) {
-	    				if (!err) {
-			            	res.writeHead(200, { 'Content-Type': 'text/html' });
-							res.end(html);
-	    				}
+			pl.on('error', function(err) {
+				app.plugins.error.fail(err, res);
+			})
+			.on('end', function(err, results) {
+				if (!err) {
+					app.plugins.static.stream({
+	    				path: req.urlParsed.pathname,
+	    				res: res,
+	    				content: results[results.length - 1]
+	    			}, function(err) {
+	    				app.plugins.error.fail(err, res);
 	    			});
-		    	}
-	    	})
-
-	    	.execute({
-	    		q: req.params.query || req.query.q
-	    	});
+				}
+			})
+			.execute({
+				file: file
+			});
 	    });
 
-	    // secret twitter!
-	    router.get('/api/twitter?:query', function(req, res) {
-	    	var pl = Pipeline.create("Twitter API Pipeline: " + (req.params.query || req.query.q));
+		// style sheets files
+	    router.get('/img/:image', function(req, res) {
 
-	    	pl.use(function(results, next) {
-	    		app.plugins.twitter(results[0], next);
-	    	}, "Executing Search")
+	    	// create pipeline instance
+	    	var pl = app.plugins.pipelines.static();
 
-	    	.on('step', function(name, action){
-	    		console.log(pl.name + ':' + name);
-	    	})
+	    	// give it a helpful name (this is good practice for logging)
+	    	pl.name += ': ' + req.urlParsed.path;
 
-	    	.on('error', function(err) {
-	    		app.plugins.error.fail(err, res);
-	    	})
+	    	// execute it!
+	    	pl.execute({ path: req.urlParsed.pathname.replace('/img', ''), res: res, locations: ['./img'] });
+	    });
 
-	    	.on('end', function(err, results) {
-	    		if (!err) {
-		    		app.plugins.json(results[results.length - 1], res);
-		    	}
-	    	})
+	    // style sheets files
+	    router.get('/favicon.ico', function(req, res) {
 
-	    	.execute({
-	    		q: req.params.query || req.query.q
-	    	});
+	    	// create pipeline instance
+	    	var pl = app.plugins.pipelines.static();
+
+	    	// give it a helpful name (this is good practice for logging)
+	    	pl.name += ': ' + req.urlParsed.path;
+
+	    	// execute it!
+	    	pl.execute({ path: req.urlParsed.pathname, res: res, locations: ['./img'] });
 	    });
 
 	    return router;
@@ -107,4 +105,4 @@ BoilerplateRouter.prototype.attach = function (options) {
 
 };
 
-module.exports = BoilerplateRouter;
+module.exports = HelloRouter;

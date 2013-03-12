@@ -1,6 +1,6 @@
 {
     "name": "mixdown-boilerplate",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "main": "index",
     "description": "Base site implementation for a mixdown powered site.",
     "keywords": [
@@ -26,21 +26,17 @@
         "start": "node server"
     },
     "dependencies": {
-        "request": "*",
-        "lodash": "*",
-        "broadway-handlebars": "*",
-        "async": "*",
+        "lodash": "1.0.1",
         "pipeline-router": "*",
-        "winston" : "*",
-        "winston-syslog": "*",
-        "optimist": "*",
-        "mixdown-server": "*",
+        "winston" : "0.6.2",
+        "optimist": "0.3.4",
+        "mixdown-server": "0.3.7",
         "mixdown-plugins": "*",
-        "node-pipeline": "*",
-        "browserify": "*",
-        "uglify-js": "*",
-        "backbone-browserify": "*",
-        "jquery-browserify": "*"
+        "mixdown-pipelines": "*",
+        "handlebars-browserify": "*",
+        "broadway-handlebars": "*",
+        "mixdown-less": "*",
+        "node-pipeline": "*"
     },
         "devDependencies": {
     },

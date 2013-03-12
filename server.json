@@ -3,16 +3,20 @@
 		"plugins":{
 			"router": {
 				"module": "/plugins/router.js"
+			},			
+			"pipelines": {
+				"module": "/plugins/pipelines.js"
 			},
 			"view": {
 				"module": "broadway-handlebars",
 				"options": {
 					"optimize": false,
-					"development": true
+					"development": true,
+					"view": {
+                        "base": ["./views"],
+                        "ext": "html"
+                    }
 				}
-			},
-			"twitter": {
-				"module": "/plugins/twitter.js"
 			},
 			"json": {
 				"module": "mixdown-plugins#Json"
@@ -21,15 +25,13 @@
 				"module": "mixdown-plugins#Error"
 			},
 			"static": {
-				"module": "mixdown-plugins#Static",
-				"options": {
-					"path": "/static"
-				}
-			},
-			"browserify": {
-				"module": "mixdown-plugins#Browserify",
-				"options": {
-					"compress": false
+                "module": "mixdown-plugins#Static"
+            },
+			"less": {
+				"module": "mixdown-less",
+				"options": { 
+					"compress": true, 
+					"paths": ["./css"] 
 				}
 			}
 		}
@@ -39,13 +41,31 @@
 			"id": "boilerplate",
 			"hostmap": [
 				"localhost",
-				"boilerplate.local",
 				"127.0.0.1"
 			],
 			"plugins": {}
 		}
 	],
-	"server": {
-	    "port": 8080
-	}
+    "server": {
+        "listen": {
+            "port": 8081,
+            "type": "tcp",
+            "path": "/tmp/socketname.sock"
+        },
+        "logger": {
+            "defaults": {
+                "handleExceptions": false,
+                "json": false,
+                "timestamp": true,
+                "colorize": true,
+                "prettyPrint": true
+            },
+            "transports": [{
+                "transport": "Console",
+                "options": {
+                    "level": "debug"
+                }
+            }]
+        }
+    }
 }
