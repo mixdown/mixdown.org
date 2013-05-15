@@ -1,6 +1,6 @@
 {
-    "name": "mixdown-boilerplate",
-    "version": "0.2.0",
+    "name": "mixdown.org",
+    "version": "0.0.1",
     "main": "index",
     "description": "Base site implementation for a mixdown powered site.",
     "keywords": [
@@ -14,7 +14,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "git@github.com:mixdown/boilerplate"
+        "url": "git@github.com:/mixdown/mixdown.org"
     },
     "directories": {
         "tests": "tests"
