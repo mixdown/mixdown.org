@@ -2,20 +2,28 @@
 	"app": {
 		"plugins":{
 			"router": {
-				"module": "/plugins/router.js"
+				"module": "/plugins/router.js",
+            "options": {
+              "routeTable": {
+                 "home": "/"
+                ,"getStarted": "/get-started"
+                ,"docsHome": "/docs"
+                ,"docs": "/docs/:docid"
+              }
+            }
 			},			
 			"pipelines": {
 				"module": "/plugins/pipelines.js"
 			},
 			"view": {
-				"module": "broadway-handlebars",
+				"module": "/plugins/render.js",
 				"options": {
 					"optimize": false,
 					"development": true,
 					"view": {
-                        "base": ["./views"],
-                        "ext": "html"
-                    }
+            "base": ["./views"],
+            "ext": "html"
+          }
 				}
 			},
 			"json": {
@@ -38,7 +46,7 @@
 	},
 	"sites": [
 		{
-			"id": "boilerplate",
+			"id": "mixdown",
 			"hostmap": [
 				"localhost",
 				"127.0.0.1"

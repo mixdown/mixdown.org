@@ -27,16 +27,15 @@
     },
     "dependencies": {
         "lodash": "1.0.1",
-        "pipeline-router": "*",
-        "winston" : "0.6.2",
+        "pipeline-router": "0.7.x",
         "optimist": "0.3.4",
-        "mixdown-server": "0.3.7",
-        "mixdown-plugins": "*",
-        "mixdown-pipelines": "*",
-        "handlebars-browserify": "*",
+        "mixdown-server": "~0.3.10",
+        "mixdown-plugins": "~2.1.0",
+        "mixdown-pipelines": "~0.0.2",
         "broadway-handlebars": "*",
-        "mixdown-less": "*",
-        "node-pipeline": "*"
+        "mixdown-less": "~0.1.0",
+        "node-pipeline": "~0.4.0",
+        "cradle": "*"
     },
         "devDependencies": {
     },

@@ -1,28 +1,56 @@
 <html>
-    <head>
-        <title>Hello Mixdown!</title>
-        <link rel="stylesheet" href="/css/style.css">
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    </head>
+  <head>
+      <title>Hello Mixdown!</title>
+      <meta name="viewport" content="width=device-width" />
+      <meta name="viewport" content="initial-scale=1.0" />
+      <link rel="stylesheet" href="/css/style.css">
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  </head>
 
-    <body>
-        {{! mirrors the querystring back to the page }}
-        <header>
-            <h1>Hello {{def query.world def="World"}}</h1>
-        </header>
-
-        <p>
-            You have created your first mixdown project.  Please contribute here &rarr; <a href="https://github.com/mixdown/boilerplate">https://github.com/mixdown/boilerplate</a>
-        </p>
-        <p>
-            Check out the following helpful projects.  They are all part of this boilerplate.
-        </p>
-        <ul>
-            <li><a href="https://github.com/mixdown/server" target="_blank">Mixdown Server</a>: Server and entry point for web site or service.  Not required for a CLI project.</li>
-            <li><a href="https://github.com/mixdown/plugins" target="_blank">Mixdown Plugins</a>: Common plugins for websites.</li>
-            <li><a href="https://github.com/mixdown/pipelines" target="_blank">Mixdown Pipelines</a>: Common task pipelines for handling request.  Pipelines are not required with mixdown, but they are very helpful for sequencing plugin actions.  Think of them as Controllers if you like.</li>
-            <li><a href="https://github.com/tommydudebreaux/pipeline" target="_blank">Node Pipeline</a>: Lightweight task sequencing for handling complex async sequences of operations.  Similar to async.waterfall, but with a more expressive inteface and more event emitter feedback.</li>
-            <li><a href="https://github.com/vast-eng/broadway-handlebars" target="_blank">Broadway Handlebars</a>: Broadway / Mixdown plugin for using the Handlebars template engine.  Contains factory support.  The Handlebars team has been holding off my pull request for months now so this is the best way to get factory support.  This will also work clientside.</li>
+  <body>
+      <header>
+        <a href="{{getUrl "home"}}"><h1>mixdown.js</h1></a>
+        <ul id="menu">
+          <li><a href="{{getUrl "getStarted"}}">Get Started</a></li>
+          <li><a href="{{getUrl "docsHome"}}">Docs</a></li>
         </ul>
-    </body>
+        <a href="https://github.com/mixdown"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+      </header>
+
+      <article>
+        <h2>mixdown.js</h2>
+        Mixdown is a philosophy.  <strong>Stop Hacking Middleware.  Start Remixing.</strong>
+
+        Loosely coupled plugins and modules are the core of node.js development.  Mixdown is a set of libraries that help you develop any type of application (web, cli, etc) faster and cleaner.  It can be consumed as a framework if you like or pick your components "dim-sum" style.
+      </article>
+
+      <article>
+        <section>
+          <h2>Remix over refactor</h2>
+          <p>
+            When you write something once, you should re-use it. Mixdown is a set of components that allow you to remix open source or your custom components.
+          </p>
+        </section>
+        <section>
+          <h2>Put a plugin on it (Plugins over middleware)</h2>
+          <p>
+            e.g. Plugins over middleware
+            <br />Small discrete packages are a core concept of npm.  Mixdown leverages flatiron/broadway for plugin interfaces.
+          </p>
+        </section>
+        <section>
+          <h2>You are the mix master</h2>
+          <p>
+            Plugins a discrete components. Mixdown lets you remix anything into your application. Quickly. While keeping your code clean and well-factored.
+          </p>
+        </section>
+        <section>
+          <h2>Distributed configuration (if you wanna)</h2>
+          <p>
+            Configuration based dependency injection allows storage of your site configuration anywhere. File system, zookeeper, any NoSql, or anywhere else you can think of. (Except carrier pigeon, but they aren't real time so you probably don't care)
+          </p>
+        </section>
+      </article>
+
+  </body>
 </html>

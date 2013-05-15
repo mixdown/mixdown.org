@@ -1,29 +1,50 @@
+@import "elements.less"; 
+
 @base_color: #0079C2;   
 @comp_color: #FFD;
 @font_color: #333; 
 
 
 body {
-    background: #fff;
-    font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
-    color: #333;
+  background: #fff;
+  font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
+  color: #333;
+  background: url(/img/bg.jpg);
 }
 
-header {
-    margin: 0 auto;
-    border-bottom: 5px solid @font_color;
-    background: url(/img/bg_header.png);
-    height: 50px;
+article {
+  margin: 0 auto;
+  background: #fff;
+  .rounded(3px);
+  padding: 10px;
+}
 
-    h1 {
-        padding: 3px 10px;
-        margin: 0;
+
+header {
+  margin: 0 auto;
+  border-bottom: 5px solid @font_color;
+  background: #f38709;
+  .rounded(3px);  
+  padding: 10px;
+
+  h1 {
+    padding: 3px 10px;
+    margin: 0;
+  }
+
+  #menu {
+    list-style-type: none;
+    li {
+      float: left;
     }
+  }
 }
 
 ul {
-    li {
-        padding: 10px 0;
-    }
+  li {
+    padding: 0 1em;
+  }
 }
+
+@import 'media.less';
 
